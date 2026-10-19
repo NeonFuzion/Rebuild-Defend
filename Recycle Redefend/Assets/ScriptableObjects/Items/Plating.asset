@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b85f0df9b32523449b47198bfdf766f, type: 3}
+  m_Name: Plating
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  <Sprite>k__BackingField: {fileID: -6352421912928365478, guid: a4f80792134a00545b406bba09259137, type: 3}
