@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] float restDuration, waveDuration;
     [SerializeField] AudioClip waveStartAudioClip, waveEndAudioClip, countdownAudioClip;
+    [SerializeField] GameObject shipment;
     [SerializeField] Health health;
     [SerializeField] TextMeshProUGUI stateText;
 
@@ -53,8 +54,11 @@ public class BattleManager : MonoBehaviour
             timeRemaining = newTime;
             stateText.SetText("Time left before next wave: " + timeRemaining);
 
-            if (timeRemaining > 5) return;
-            SoundEffectsManager.Instance.PlaySoundEffect(countdownAudioClip, transform.position, 1);
+            if (timeRemaining <= 0)
+                SoundEffectsManager.Instance.PlaySoundEffect(waveStartAudioClip, transform.position, 1);
+            else if (timeRemaining <= 5)
+                SoundEffectsManager.Instance.PlaySoundEffect(countdownAudioClip, transform.position, 1);
+
         }
         
     }
@@ -62,7 +66,6 @@ public class BattleManager : MonoBehaviour
     IEnumerator WaveCoroutine()
     {
         IsInCombat = true;
-        SoundEffectsManager.Instance.PlaySoundEffect(waveStartAudioClip, transform.position, 1);
         yield return new WaitWhile(() => SpawnerManager.Instance.AreEnemiesActive);
         InvokeOnWaveEndedEvent();
     }

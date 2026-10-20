@@ -149,8 +149,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurretButton
   clickAudioClip: {fileID: 8300000, guid: e871782a8a934ac448080cb088bcea7f, type: 3}
   turretRecipe: {fileID: 0}
+  highlightColor: {r: 1, g: 1, b: 0, a: 1}
   baseImage: {fileID: 71803978207432007}
   pivotImage: {fileID: 8628433688531789546}
+  backgroundImage: {fileID: 7108485416004182982}
   onOptionSelected:
     m_PersistentCalls:
       m_Calls: []
@@ -188,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 22}
+  m_AnchoredPosition: {x: 0, y: 13}
   m_SizeDelta: {x: 150, y: 187.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7362599009822521025
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3927846026473746091, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -263,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -19}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1028551308034591597
@@ -294,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8453065700716218269, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

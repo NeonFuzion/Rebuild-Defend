@@ -1,32 +1,43 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class TurretManager : MonoBehaviour
 {
-    [SerializeField] int itemCount = 10;
+    [SerializeField] Vector2 placementBounds, durabilityBarOffset = new Vector2(0, -1.25f);
+    [SerializeField] DurabilityBar prefabDurabilityBar;
     [SerializeField] ItemSlot prefabItemSlot;
-    [SerializeField] Transform itemParent;
     [SerializeField] AudioClip placeSuccessAudioClip, placeFailAudioClip;
-    [SerializeField] ItemSO[] items;
+    [SerializeField] Transform itemParent, turretParent;
+    [SerializeField] ItemToAmount[] items;
     [SerializeField] UnityEvent onTurretPlaced;
 
     Vector2 mousePosition;
     TurretRecipeSO currentRecipe;
 
+    TurretButton[] turretButtons;
     Dictionary<ItemSO, AmountToSlot> inventory;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inventory = new Dictionary<ItemSO, AmountToSlot>();
-        foreach (ItemSO item in items)
+        foreach (ItemToAmount pair in items)
         {
             ItemSlot itemSlot = Instantiate(prefabItemSlot, itemParent);
-            itemSlot.Initialize(item.Sprite, itemCount);
-            inventory.Add(item, new (itemCount, itemSlot));
+            itemSlot.Initialize(pair.Item.Sprite, pair.Amount);
+            inventory.Add(pair.Item, new (pair.Amount, itemSlot));
+        }
+
+        turretButtons = new TurretButton[turretParent.childCount];
+        for (int i = 0; i < turretButtons.Length; i++)
+        {
+            TurretButton turretButton = turretParent.GetChild(i).GetComponent<TurretButton>();
+            turretButtons[i] = turretButton;
+            turretButton.Initialize(i);
         }
     }
 
@@ -38,7 +49,7 @@ public class TurretManager : MonoBehaviour
 
     void PlaceTurret()
     {
-        if (!currentRecipe)
+        if (!currentRecipe || Mathf.Abs(mousePosition.x) > placementBounds.x || Mathf.Abs(mousePosition.y) > placementBounds.y)
         {
             SoundEffectsManager.Instance.PlaySoundEffect(placeFailAudioClip, mousePosition, 1);
             return;
@@ -63,13 +74,21 @@ public class TurretManager : MonoBehaviour
         }
 
         GameObject turretGameObject = Instantiate(currentRecipe.PrefabTurret, mousePosition, Quaternion.identity);
+        DurabilityBar durabilityBar = Instantiate(prefabDurabilityBar, mousePosition + durabilityBarOffset, Quaternion.identity);
+        durabilityBar.transform.SetParent(UIManager.Instance.WorldCanvas);
+        turretGameObject.GetComponent<Turret>().Initialize(durabilityBar);
         SoundEffectsManager.Instance.PlaySoundEffect(placeSuccessAudioClip, mousePosition, 1);
         onTurretPlaced?.Invoke();
     }
 
-    public void SetTurret(TurretRecipeSO turretRecipe)
+    public void SetTurret(TurretRecipeSO turretRecipe, int index)
     {
         currentRecipe = turretRecipe;
+
+        foreach (TurretButton turretButton in turretButtons)
+        {
+            turretButton.Highlight(index);
+        }
     }
 
     public void HandlePointInput(InputAction.CallbackContext context)

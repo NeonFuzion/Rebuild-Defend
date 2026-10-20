@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] int damage;
+    [SerializeField] int damage, durability;
     [SerializeField] float cooldown = 1, rotationSpeed = 3, detectionRange = 8, fireAngleThreshold = 0.5f;
     [SerializeField] AnimationCurve rotationSmoothCurve;
     [SerializeField] ProjectileSO projectileData;
@@ -15,20 +18,23 @@ public class Turret : MonoBehaviour
 
     int firingAnimHash = Animator.StringToHash("TurretFire"),
         placingAnimHash = Animator.StringToHash("TurretPlace"),
-        idleAnimHash = Animator.StringToHash("TurretIdle");
+        idleAnimHash = Animator.StringToHash("TurretIdle"),
+        breakAnimHash = Animator.StringToHash("TurretBreak");
 
     float currentAngle, targetAngle, aimTime;
 
     Vector2 targetPosition;
-    [SerializeField] TurretState turretState;
+    TurretState turretState;
     Animator animator;
+    UnityEvent<int> onTickDurability;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         turretState = TurretState.Idle;
-
         animator = GetComponent<Animator>();
+
+        BattleManager.Instance.AddOnWaveEndedListener((System.Object obj, EventArgs args) => UpdateDurability());
     }
 
     // Update is called once per frame
@@ -70,6 +76,16 @@ public class Turret : MonoBehaviour
         animator.CrossFade(idleAnimHash, 0, 0);
     }
 
+    void UpdateDurability()
+    {
+        durability--;
+        onTickDurability.Invoke(durability);
+
+        if (durability > 0) return;
+        turretState = TurretState.Breaking;
+        animator.CrossFade(breakAnimHash, 0, 0);
+    }
+
     void OnAnimationFire()
     {
         particleSystem.Play();
@@ -77,6 +93,13 @@ public class Turret : MonoBehaviour
         projectile.Initialize(firePoint.position, targetPosition, projectileData, damage);
         StartCoroutine(TargettingCoroutine());
     }
-}
 
-enum TurretState { None, Idle, Aiming, Firing, Recovering }
+    public void Initialize(DurabilityBar durabilityBar)
+    {
+        onTickDurability = new UnityEvent<int>();
+        onTickDurability.AddListener(durabilityBar.UpdateDurability);
+        durabilityBar.Initialize(durability);
+    }
+
+    enum TurretState { None, Idle, Aiming, Firing, Recovering, Breaking }
+}

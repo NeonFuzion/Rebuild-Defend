@@ -3,10 +3,22 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
+    [SerializeField] Transform worldCanvas;
+
     int appearAnimHash = Animator.StringToHash("CraftingAppear"),
         disappearAnimHash = Animator.StringToHash("CraftingDisappear");
 
     Animator animator;
+
+    public Transform WorldCanvas => worldCanvas;
+
+    void Awake()
+    {
+        if (Instance) return;
+        Instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
