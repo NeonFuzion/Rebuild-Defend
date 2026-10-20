@@ -6,12 +6,11 @@ public class SpawnerManager : MonoBehaviour
 {
     public static SpawnerManager Instance { get; private set; }
 
-    [SerializeField] int spawnerCount = 3;
-    [SerializeField] float spawnCooldown = 1.5f, subwaveCount = 5, spawnChance = 0.8f, upgradeChance = 0.1f, spawnRadius = 5;
-    [SerializeField] GameObject prefabSpawner;
+    [SerializeField] int spawnerCount = 3, spawnerIncrementAmount = 1, subwaveCount = 5, subwaveIncrementAmount = 1;
+    [SerializeField] float spawnCooldown = 1.5f, spawnChance = 0.8f, upgradeChance = 0.1f, upgradeIncrementAmount = 0.05f, spawnRadius = 5;
+    [SerializeField] GameObject prefabSpawner, prefabShipment;
     [SerializeField] Transform commandCenter, spawnArea;
     [SerializeField] GameObject[] prefabEnemies;
-
 
     List<Transform> spawners;
     Dictionary<EnemyType, List<Enemy>> enemyPool;
@@ -38,6 +37,7 @@ public class SpawnerManager : MonoBehaviour
     void Start()
     {
         BattleManager.Instance.AddOnWaveStartedListener((object obj, System.EventArgs args) => StartCoroutine(SpawnCoroutine()));
+        BattleManager.Instance.AddOnWaveEndedListener((object obj, System.EventArgs args) => CreateShipment());
 
         for (int i = 0; i < spawnerCount; i++)
         {
@@ -51,7 +51,7 @@ public class SpawnerManager : MonoBehaviour
         
     }
 
-    void CreateSpawner()
+    Vector2 GetEdgePosition()
     {
         float x = 0;
         float y = 0;
@@ -66,7 +66,17 @@ public class SpawnerManager : MonoBehaviour
             x = Mathf.Sign(Random.value - 0.5f) * bounds.x;
             y = Random.Range(-bounds.y, bounds.y);
         }
-        GameObject spawner = Instantiate(prefabSpawner, new Vector2(x, y), Quaternion.identity);
+        return new (x, y);
+    }
+
+    void CreateShipment()
+    {
+        GameObject shipment = Instantiate(prefabShipment, GetEdgePosition(), Quaternion.identity);
+    }
+
+    void CreateSpawner()
+    {
+        GameObject spawner = Instantiate(prefabSpawner, GetEdgePosition(), Quaternion.identity);
         spawners.Add(spawner.transform);
     }
 
@@ -94,6 +104,13 @@ public class SpawnerManager : MonoBehaviour
 
     IEnumerator SpawnCoroutine()
     {
+        switch (Random.Range(0, 3))
+        {
+            case 0: spawnerCount += spawnerIncrementAmount; break;
+            case 1: subwaveCount += subwaveIncrementAmount; break;
+            case 2: upgradeChance += upgradeIncrementAmount; break;
+        }
+
         AreEnemiesActive = true;
         for (int i = 0; i < subwaveCount; i++)
         {

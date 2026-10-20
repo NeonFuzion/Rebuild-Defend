@@ -12,7 +12,6 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] float restDuration, waveDuration;
     [SerializeField] AudioClip waveStartAudioClip, waveEndAudioClip, countdownAudioClip;
-    [SerializeField] GameObject shipment;
     [SerializeField] Health health;
     [SerializeField] TextMeshProUGUI stateText;
 
@@ -20,6 +19,12 @@ public class BattleManager : MonoBehaviour
     int timeRemaining, enemiesRemaining;
 
     event EventHandler onWaveStarted, onWaveEnded;
+    event EventHandler<AddItemArgs> onShipmentCollected;
+    public class AddItemArgs : EventArgs
+    {
+        public ItemSO Item;
+        public int Amount;
+    }
 
     public bool IsInCombat { get; private set; }
 
@@ -94,6 +99,11 @@ public class BattleManager : MonoBehaviour
         onWaveEnded += eventHandler;
     }
 
+    public void AddOnShipmentCollectedListener(EventHandler<AddItemArgs> eventHandler)
+    {
+        onShipmentCollected += eventHandler;
+    }
+
     public void InvokeOnWaveStartedEvent()
     {
         onWaveStarted?.Invoke(this, EventArgs.Empty);
@@ -104,5 +114,10 @@ public class BattleManager : MonoBehaviour
     {
         onWaveEnded?.Invoke(this, EventArgs.Empty);
         StartCoroutine(RestCoroutine());
+    }
+
+    public void InvokeOnShipmentCollectedEvent(ItemSO item, int amount)
+    {
+        onShipmentCollected?.Invoke(this, new AddItemArgs() { Item = item, Amount = amount });
     }
 }

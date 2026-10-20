@@ -11,6 +11,8 @@ public class ItemSlot : MonoBehaviour
     int targetAmount;
     float changeTime, currentAmount;
 
+    public int Amount => targetAmount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,13 +34,13 @@ public class ItemSlot : MonoBehaviour
         changeTime = 0;
     }
 
-    public void Initialize(Sprite sprite, int amount)
+    public virtual void Initialize(ItemSO item, int amount)
     {
         currentAmount = amount;
         targetAmount = amount;
         changeTime = 1;
 
         amountText.SetText(amount + "");
-        itemImage.sprite = sprite;
+        itemImage.sprite = item.Sprite;
     }
 }

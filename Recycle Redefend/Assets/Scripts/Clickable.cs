@@ -1,13 +1,19 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Clickable : MonoBehaviour
 {
-    bool isMouseIn;
+    [SerializeField] Vector2 offset = new Vector2(0, 2);
+    [SerializeField] GameObject prefabSignifier;
+    [SerializeField] UnityEvent onClick;
+
+    GameObject signifier;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        signifier = Instantiate(prefabSignifier, UIManager.Instance.WorldCanvas);
+        signifier.transform.position = (Vector2)transform.position + offset;
     }
 
     // Update is called once per frame
@@ -16,13 +22,13 @@ public class Clickable : MonoBehaviour
         
     }
 
-    void OnMouseEnter()
+    void OnMouseDown()
     {
-        isMouseIn = true;
+        onClick?.Invoke();
     }
 
-    void OnMouseExit()
+    public void DestroySignifier()
     {
-        isMouseIn = false;
+        Destroy(signifier);
     }
 }

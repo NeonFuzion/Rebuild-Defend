@@ -24,11 +24,13 @@ public class TurretManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        BattleManager.Instance.AddOnShipmentCollectedListener((System.Object obj, BattleManager.AddItemArgs args) => AddItem(args.Item, args.Amount));
+
         inventory = new Dictionary<ItemSO, AmountToSlot>();
         foreach (ItemToAmount pair in items)
         {
             ItemSlot itemSlot = Instantiate(prefabItemSlot, itemParent);
-            itemSlot.Initialize(pair.Item.Sprite, pair.Amount);
+            itemSlot.Initialize(pair.Item, pair.Amount);
             inventory.Add(pair.Item, new (pair.Amount, itemSlot));
         }
 
@@ -79,6 +81,13 @@ public class TurretManager : MonoBehaviour
         turretGameObject.GetComponent<Turret>().Initialize(durabilityBar);
         SoundEffectsManager.Instance.PlaySoundEffect(placeSuccessAudioClip, mousePosition, 1);
         onTurretPlaced?.Invoke();
+    }
+
+    void AddItem(ItemSO item, int amount)
+    {
+        AmountToSlot amountToSlot = inventory[item];
+        amountToSlot.Amount += amount;
+        amountToSlot.ItemSlot.UpdateAmount(amountToSlot.Amount);
     }
 
     public void SetTurret(TurretRecipeSO turretRecipe, int index)
