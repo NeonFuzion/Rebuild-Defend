@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f539bba3b3bbc945982c77f55dc11a4, type: 3}
+  m_Name: SniperProjectile
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSO
+  <Speed>k__BackingField: 20
+  <MaxHeight>k__BackingField: 0
+  <MaxDistance>k__BackingField: 40
+  <DamageRadius>k__BackingField: 0.5
+  <InvinciblityFrames>k__BackingField: 0.5
+  <IsPiercing>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 5320290862102508185, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
+  <TrajectoryCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

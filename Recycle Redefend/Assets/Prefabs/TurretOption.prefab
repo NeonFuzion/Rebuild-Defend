@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74217734c18e58540ad99575983e83eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretButton
+  clickAudioClip: {fileID: 8300000, guid: e871782a8a934ac448080cb088bcea7f, type: 3}
   turretRecipe: {fileID: 0}
   baseImage: {fileID: 71803978207432007}
   pivotImage: {fileID: 8628433688531789546}

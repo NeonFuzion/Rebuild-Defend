@@ -1,17 +1,18 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int damage;
+    [SerializeField] AudioClip hitAudioClip, deathAudioClip;
     [SerializeField] LayerMask baseLayer;
 
     int hitAnimHash = Animator.StringToHash("EnemyHit"),
         deathAnimHash = Animator.StringToHash("EnemyDeath"),
         spawnAnimHash = Animator.StringToHash("EnemySpawn");
 
-    bool isMobile;
-
+    EnemyState enemyState;
     NavMeshAgent navMeshAgent;
     Animator animator;
     Health healthScript;
@@ -33,8 +34,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMobile) navMeshAgent.destination = targetPosition;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        if (enemyState != EnemyState.Idle) return;
+        navMeshAgent.destination = targetPosition;
 
         if (transform.position.magnitude > 2) return;
         BattleManager.Instance.DealDamage(damage);
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
 
     void OnAnimationHit()
     {
-        isMobile = true;
+        enemyState = EnemyState.Idle;
     }
 
     public void Initialize(Vector2 position, Vector2 targetPosition)
@@ -56,21 +57,29 @@ public class Enemy : MonoBehaviour
         this.targetPosition = targetPosition;
 
         healthScript.Initialize();
-        isMobile = true;
+        enemyState = EnemyState.Idle;
         transform.position = new (position.x, position.y, 0);
         animator.CrossFade(spawnAnimHash, 0, 0);
     }
 
     public void TakeDamage(int damage)
     {
-        healthScript.TakeDamage(damage);
-        isMobile = false;
-        animator.CrossFade(hitAnimHash, 0, 0);
+        if (enemyState == EnemyState.Dead) return;
+        bool isDead = healthScript.TakeDamage(damage);
+        
+        if (isDead)
+        {
+            enemyState = EnemyState.Dead;
+            SoundEffectsManager.Instance.PlaySoundEffect(deathAudioClip, transform.position, 1);
+            animator.CrossFade(deathAnimHash, 0, 0);
+        }
+        else
+        {
+            enemyState = EnemyState.Hit;
+            SoundEffectsManager.Instance.PlaySoundEffect(hitAudioClip, transform.position, 1);
+            animator.CrossFade(hitAnimHash, 0, 0);
+        }
     }
 
-    public void OnDeath()
-    {
-        isMobile = false;
-        animator.CrossFade(deathAnimHash, 0, 0);
-    }
+    enum EnemyState { None, Idle, Hit, Dead }
 }

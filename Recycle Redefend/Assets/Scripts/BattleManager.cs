@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using TMPro;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,11 +11,12 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance { get; private set; }
 
     [SerializeField] float restDuration, waveDuration;
+    [SerializeField] AudioClip waveStartAudioClip, waveEndAudioClip, countdownAudioClip;
     [SerializeField] Health health;
     [SerializeField] TextMeshProUGUI stateText;
 
-    string text;
     float baseTime;
+    int timeRemaining, enemiesRemaining;
 
     event EventHandler onWaveStarted, onWaveEnded;
 
@@ -35,16 +37,32 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        stateText.SetText(text + (IsInCombat ?
-            SpawnerManager.Instance.ActiveEnemyCount :
-            (int)(baseTime - Time.time))
-        );
+        if (IsInCombat)
+        {
+            int currentEnemiesRemaining = SpawnerManager.Instance.ActiveEnemyCount;
+
+            if (currentEnemiesRemaining == enemiesRemaining) return;
+            enemiesRemaining = currentEnemiesRemaining;
+            stateText.SetText("Enemies left in current wave: " + enemiesRemaining);
+        }
+        else
+        {
+            int newTime = Mathf.RoundToInt(baseTime - Time.time);
+
+            if (newTime == timeRemaining) return;
+            timeRemaining = newTime;
+            stateText.SetText("Time left before next wave: " + timeRemaining);
+
+            if (timeRemaining > 5) return;
+            SoundEffectsManager.Instance.PlaySoundEffect(countdownAudioClip, transform.position, 1);
+        }
+        
     }
 
     IEnumerator WaveCoroutine()
     {
         IsInCombat = true;
-        text = "Enemies left in current wave: ";
+        SoundEffectsManager.Instance.PlaySoundEffect(waveStartAudioClip, transform.position, 1);
         yield return new WaitWhile(() => SpawnerManager.Instance.AreEnemiesActive);
         InvokeOnWaveEndedEvent();
     }
@@ -52,8 +70,8 @@ public class BattleManager : MonoBehaviour
     IEnumerator RestCoroutine()
     {
         IsInCombat = false;
+        SoundEffectsManager.Instance.PlaySoundEffect(waveEndAudioClip, transform.position, 1);
         baseTime = Time.time + restDuration;
-        text = "Time left before next wave: ";
         yield return new WaitForSeconds(restDuration);
         InvokeOnWaveStartedEvent();
     }

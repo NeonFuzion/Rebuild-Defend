@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +16,7 @@ public class Projectile : MonoBehaviour
     ProjectileSO data;
     ParticleSystem particleSystem;
     Vector2 targetPosition, startPosition;
+    List<Collider> hitList;
     
     SpriteRenderer visualSpriteRenderer, shadowSpriteRenderer;
 
@@ -23,6 +25,7 @@ public class Projectile : MonoBehaviour
         visualSpriteRenderer = projectileVisual.GetComponent<SpriteRenderer>();
         shadowSpriteRenderer = projectileShadow.GetComponent<SpriteRenderer>();
         particleSystem = GetComponent<ParticleSystem>();
+        hitList = new List<Collider>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,8 +89,10 @@ public class Projectile : MonoBehaviour
     {
         foreach (Collider collider in colliders)
         {
+            if (hitList.Contains(collider)) continue;
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
+            hitList.Add(collider);
         }
     }
 
@@ -105,6 +110,7 @@ public class Projectile : MonoBehaviour
         this.damage = damage;
         this.data = data;
         this.startPosition = startPosition;
+
         isDying = false;
 
         Vector3 correctedTargetPosition = (targetPosition - startPosition).normalized * data.MaxDistance + startPosition;
@@ -113,5 +119,7 @@ public class Projectile : MonoBehaviour
         transform.position = startPosition;
         visualSpriteRenderer.sprite = data.Sprite;
         shadowSpriteRenderer.sprite = data.Sprite;
+
+        hitList.Clear();
     }
 }

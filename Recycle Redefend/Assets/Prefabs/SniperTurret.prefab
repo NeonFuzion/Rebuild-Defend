@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4144562698031228762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: rotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: detectionRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: projectileData
+      value: 
+      objectReference: {fileID: 11400000, guid: ae56325017be55f4280fbb4d183bfa18, type: 2}
+    - target: {fileID: 1962344333633043729, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4095391172050105586, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
+    - target: {fileID: 4573057171486757077, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4095391172050105586, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
+    - target: {fileID: 5522639427832859241, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3627158958028208274, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
+    - target: {fileID: 5948320728699806019, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_Name
+      value: SniperTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370562557250115970, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477103216914152463, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}

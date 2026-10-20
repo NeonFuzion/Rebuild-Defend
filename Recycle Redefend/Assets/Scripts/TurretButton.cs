@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TurretButton : MonoBehaviour
 {
+    [SerializeField] AudioClip clickAudioClip;
     [SerializeField] TurretRecipeSO turretRecipe;
     [SerializeField] Image baseImage, pivotImage;
     [SerializeField] UnityEvent<TurretRecipeSO> onOptionSelected;
@@ -23,6 +24,7 @@ public class TurretButton : MonoBehaviour
 
     public void SelectOption()
     {
+        SoundEffectsManager.Instance.PlaySoundEffect(clickAudioClip, transform.position, 1);
         onOptionSelected?.Invoke(turretRecipe);
     }
 }

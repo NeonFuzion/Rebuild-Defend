@@ -165,7 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd52f7724500bac408f49ed69cd85fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  damage: 10
+  damage: 5
+  hitAudioClip: {fileID: 8300000, guid: 464c4ee9e2d3662489cf046293ca997c, type: 3}
+  deathAudioClip: {fileID: 8300000, guid: 9e86a049a417f5d468a298f8cf363440, type: 3}
   baseLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -187,19 +189,7 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -874446186958046528}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6895367112046701414
 MonoBehaviour:
   m_ObjectHideFlags: 0

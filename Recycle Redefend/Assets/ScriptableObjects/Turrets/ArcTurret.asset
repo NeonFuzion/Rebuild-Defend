@@ -17,8 +17,8 @@ MonoBehaviour:
   <PivotSprite>k__BackingField: {fileID: 3927846026473746091, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}
   <Materials>k__BackingField:
   - <Item>k__BackingField: {fileID: 11400000, guid: 2b304ad28513c9546889bfe8ad300736, type: 2}
-    <Amount>k__BackingField: 1
+    <Amount>k__BackingField: 8
   - <Item>k__BackingField: {fileID: 11400000, guid: 465da7c87dab057408dc4e631edf141d, type: 2}
-    <Amount>k__BackingField: 1
+    <Amount>k__BackingField: 5
   - <Item>k__BackingField: {fileID: 11400000, guid: cf55031f1e2bb6c4dae8b6f780907d67, type: 2}
-    <Amount>k__BackingField: 2
+    <Amount>k__BackingField: 12

@@ -16,6 +16,7 @@ MonoBehaviour:
   <MaxHeight>k__BackingField: 2
   <MaxDistance>k__BackingField: 40
   <DamageRadius>k__BackingField: 3
+  <InvinciblityFrames>k__BackingField: 0.5
   <IsPiercing>k__BackingField: 0
   <Sprite>k__BackingField: {fileID: -5064475582718273651, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}
   <TrajectoryCurve>k__BackingField:

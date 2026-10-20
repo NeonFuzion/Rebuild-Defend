@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
       propertyPath: damage
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1118568004034381855, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
       propertyPath: cooldown
@@ -21,6 +21,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7526996f6ede15344bcc539f0e5fa242, type: 2}
     - target: {fileID: 1962344333633043729, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8453065700716218269, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}
+    - target: {fileID: 4573057171486757077, guid: 3bceff6f9118c6245899a49bb7b7334c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 8453065700716218269, guid: 18e05012395975e4d9bf26ec993afd6b, type: 3}

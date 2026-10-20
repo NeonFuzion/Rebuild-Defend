@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 public class TurretManager : MonoBehaviour
 {
     [SerializeField] int itemCount = 10;
-    [SerializeField] GameObject prefabItemSlot;
+    [SerializeField] ItemSlot prefabItemSlot;
     [SerializeField] Transform itemParent;
+    [SerializeField] AudioClip placeSuccessAudioClip, placeFailAudioClip;
     [SerializeField] ItemSO[] items;
     [SerializeField] UnityEvent onTurretPlaced;
 
@@ -23,7 +24,7 @@ public class TurretManager : MonoBehaviour
         inventory = new Dictionary<ItemSO, AmountToSlot>();
         foreach (ItemSO item in items)
         {
-            ItemSlot itemSlot = Instantiate(prefabItemSlot, itemParent).GetComponent<ItemSlot>();
+            ItemSlot itemSlot = Instantiate(prefabItemSlot, itemParent);
             itemSlot.Initialize(item.Sprite, itemCount);
             inventory.Add(item, new (itemCount, itemSlot));
         }
@@ -37,7 +38,11 @@ public class TurretManager : MonoBehaviour
 
     void PlaceTurret()
     {
-        if (!currentRecipe) return;
+        if (!currentRecipe)
+        {
+            SoundEffectsManager.Instance.PlaySoundEffect(placeFailAudioClip, mousePosition, 1);
+            return;
+        }
         bool isCraftable = true;
         foreach (ItemToAmount pair in currentRecipe.Materials)
         {
@@ -45,7 +50,11 @@ public class TurretManager : MonoBehaviour
             isCraftable = false;
         }
 
-        if (!isCraftable) return;
+        if (!isCraftable)
+        {
+            SoundEffectsManager.Instance.PlaySoundEffect(placeFailAudioClip, mousePosition, 1);
+            return;
+        }
         foreach (ItemToAmount pair in currentRecipe.Materials)
         {
             AmountToSlot amountToSlot = inventory[pair.Item];
@@ -54,6 +63,7 @@ public class TurretManager : MonoBehaviour
         }
 
         GameObject turretGameObject = Instantiate(currentRecipe.PrefabTurret, mousePosition, Quaternion.identity);
+        SoundEffectsManager.Instance.PlaySoundEffect(placeSuccessAudioClip, mousePosition, 1);
         onTurretPlaced?.Invoke();
     }
 

@@ -13,8 +13,9 @@ public class Turret : MonoBehaviour
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] LayerMask enemyLayer;
 
-    int firingAnimHash = Animator.StringToHash("FireBullet"),
-        idleAnimHash = Animator.StringToHash("Idle");
+    int firingAnimHash = Animator.StringToHash("TurretFire"),
+        placingAnimHash = Animator.StringToHash("TurretPlace"),
+        idleAnimHash = Animator.StringToHash("TurretIdle");
 
     float currentAngle, targetAngle, aimTime;
 
@@ -76,7 +77,6 @@ public class Turret : MonoBehaviour
         projectile.Initialize(firePoint.position, targetPosition, projectileData, damage);
         StartCoroutine(TargettingCoroutine());
     }
-
 }
 
 enum TurretState { None, Idle, Aiming, Firing, Recovering }

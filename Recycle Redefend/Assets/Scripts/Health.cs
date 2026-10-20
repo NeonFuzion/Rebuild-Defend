@@ -31,12 +31,19 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-        onTakeDamage?.Invoke(damage, (float)health / maxHealth);
         health -= damage;
 
-        if (health > 0) return;
-        onDeath?.Invoke();
+        if (health <= 0)
+        {
+            onDeath?.Invoke();
+            return true;
+        }
+        else
+        {
+            onTakeDamage?.Invoke(damage, (float)health / maxHealth);
+            return false;
+        }
     }
 }
