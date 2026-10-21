@@ -4,8 +4,6 @@ using UnityEngine;
 public class TurretRecipeSO : ScriptableObject
 {
     [field: SerializeField] public GameObject PrefabTurret { get; private set; }
-    [field: SerializeField] public Sprite BaseSprite { get; private set; }
-    [field: SerializeField] public Sprite PivotSprite { get; private set; }
     [field: SerializeField] public ItemToAmount[] Materials { get; private set; }
 }
 

@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f539bba3b3bbc945982c77f55dc11a4, type: 3}
-  m_Name: StraightProjectile
+  m_Name: BasicMProjectile
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSO
-  <Speed>k__BackingField: 10
+  <Speed>k__BackingField: 13
   <MaxHeight>k__BackingField: 0
   <MaxDistance>k__BackingField: 40
-  <DamageRadius>k__BackingField: 0.5
-  <InvinciblityFrames>k__BackingField: 0.5
-  <IsPiercing>k__BackingField: 0
-  <Sprite>k__BackingField: {fileID: 322785581, guid: 8dc403c47938f90408c492f5f83aa2de, type: 3}
+  <DamageRadius>k__BackingField: 0.8
+  <PenetrationCount>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: -5294775758690868069, guid: 2e9f0ebd878515f459bd04da579c3e3e, type: 3}
   <TrajectoryCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:

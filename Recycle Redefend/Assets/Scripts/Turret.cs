@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     [SerializeField] float cooldown = 1, rotationSpeed = 3, detectionRange = 8, fireAngleThreshold = 0.5f;
     [SerializeField] AnimationCurve rotationSmoothCurve;
     [SerializeField] ProjectileSO projectileData;
+    [SerializeField] AudioClip turretRecycleAudioClip, turretFireAudioClip;
     [SerializeField] Transform pivot, firePoint;
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] LayerMask enemyLayer;
@@ -19,20 +20,25 @@ public class Turret : MonoBehaviour
     int firingAnimHash = Animator.StringToHash("TurretFire"),
         placingAnimHash = Animator.StringToHash("TurretPlace"),
         idleAnimHash = Animator.StringToHash("TurretIdle"),
-        breakAnimHash = Animator.StringToHash("TurretBreak");
+        breakAnimHash = Animator.StringToHash("TurretBreak"),
+        recycleAnimHash = Animator.StringToHash("TurretRecycle");
 
     float currentAngle, targetAngle, aimTime;
 
     Vector2 targetPosition;
     TurretState turretState;
     Animator animator;
+    TurretRecipeSO turretRecipe;
+    Clickable clickable;
     UnityEvent<int> onTickDurability;
+    UnityEvent onBreakDown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         turretState = TurretState.Idle;
         animator = GetComponent<Animator>();
+        clickable = GetComponent<Clickable>();
 
         BattleManager.Instance.AddOnWaveEndedListener((System.Object obj, EventArgs args) => UpdateDurability());
     }
@@ -82,6 +88,8 @@ public class Turret : MonoBehaviour
         onTickDurability.Invoke(durability);
 
         if (durability > 0) return;
+        StopAllCoroutines();
+        clickable?.Show();
         turretState = TurretState.Breaking;
         animator.CrossFade(breakAnimHash, 0, 0);
     }
@@ -90,15 +98,34 @@ public class Turret : MonoBehaviour
     {
         particleSystem.Play();
         Projectile projectile = ProjectileManager.Instance.RetrieveProjectile();
+        SoundEffectsManager.Instance.PlaySoundEffect(turretFireAudioClip, transform.position, 1);
         projectile.Initialize(firePoint.position, targetPosition, projectileData, damage);
         StartCoroutine(TargettingCoroutine());
     }
 
-    public void Initialize(DurabilityBar durabilityBar)
+    void OnAnimationRecycle()
     {
+        Destroy(gameObject);
+    }
+
+    public void Initialize(DurabilityBar durabilityBar, TurretRecipeSO turretRecipe)
+    {
+        this.turretRecipe = turretRecipe;
+
         onTickDurability = new UnityEvent<int>();
+        onBreakDown = new UnityEvent();
         onTickDurability.AddListener(durabilityBar.UpdateDurability);
+        onBreakDown.AddListener(() => Destroy(durabilityBar.gameObject));
         durabilityBar.Initialize(durability);
+    }
+
+    public void OnBreakDown()
+    {
+        BattleManager.Instance.InvokeOnTurretRecycledEvent(turretRecipe, transform.position);
+        SoundEffectsManager.Instance.PlaySoundEffect(turretRecycleAudioClip, transform.position, 1);
+        onBreakDown?.Invoke();
+        clickable.DestroySignifier();
+        animator.CrossFade(recycleAnimHash, 0, 0);
     }
 
     enum TurretState { None, Idle, Aiming, Firing, Recovering, Breaking }

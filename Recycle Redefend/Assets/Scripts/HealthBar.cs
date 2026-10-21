@@ -20,5 +20,6 @@ public class HealthBar : MonoBehaviour
     public void UpdateHealthbar(int damage, float healthPercentage)
     {
         healthBar.fillAmount = healthPercentage;
+        UIManager.Instance.TakeDamage();
     }
 }

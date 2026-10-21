@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
     int appearAnimHash = Animator.StringToHash("CraftingAppear"),
         disappearAnimHash = Animator.StringToHash("CraftingDisappear"),
         shipmentOpenAnimHash = Animator.StringToHash("ShipmentOpen"),
-        shipmentCloseAnimHash = Animator.StringToHash("ShipmentClose");
+        shipmentCloseAnimHash = Animator.StringToHash("ShipmentClose"),
+        healthHitAnimHash = Animator.StringToHash("HealthHit");
 
     Animator animator;
     ShipmentOption[] shipmentOptions;
@@ -67,13 +68,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void OnAnimationCloseShipment()
+    {
+        if (BattleManager.Instance.IsInCombat) return;
+        BattleManager.Instance.UnpauseTime();
+        animator.CrossFade(appearAnimHash, 0, 0);
+    }
+
     public void OpenShipment()
     {
+        BattleManager.Instance.PauseTime();
         animator.CrossFade(shipmentOpenAnimHash, 0, 0);
     }
 
     public void CloseShipment()
     {
         animator.CrossFade(shipmentCloseAnimHash, 0, 0);
+    }
+
+    public void TakeDamage()
+    {
+        animator.CrossFade(healthHitAnimHash, 0, 0);
     }
 }

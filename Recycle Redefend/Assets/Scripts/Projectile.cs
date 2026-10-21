@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
 
     float totalDistance, groundDirection;
-    int damage;
+    int damage, currentPenetrationCount;
     bool isDying;
 
     ProjectileSO data;
@@ -74,7 +74,8 @@ public class Projectile : MonoBehaviour
             if (colliders.Length == 0) return;
             DealDamage(colliders);
             
-            if (data.IsPiercing) return;
+            if (data.PenetrationCount == 0) return;
+            if (currentPenetrationCount > 0) return;
             DestroySelf();
         }
     }
@@ -93,6 +94,7 @@ public class Projectile : MonoBehaviour
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
             hitList.Add(collider);
+            currentPenetrationCount--;
         }
     }
 
@@ -112,6 +114,7 @@ public class Projectile : MonoBehaviour
         this.startPosition = startPosition;
 
         isDying = false;
+        currentPenetrationCount = data.PenetrationCount;
 
         Vector3 correctedTargetPosition = (targetPosition - startPosition).normalized * data.MaxDistance + startPosition;
         this.targetPosition = data.MaxHeight == 0 ? correctedTargetPosition : targetPosition;

@@ -10,6 +10,7 @@ public class ItemSlot : MonoBehaviour
 
     int targetAmount;
     float changeTime, currentAmount;
+    string costText;
 
     public int Amount => targetAmount;
 
@@ -25,13 +26,19 @@ public class ItemSlot : MonoBehaviour
         if (changeTime >= 1) return;
         changeTime += changeSpeed * Time.deltaTime;
         currentAmount = Mathf.Lerp(currentAmount, targetAmount, changeSpeed);
-        amountText.SetText(Mathf.RoundToInt(currentAmount) + "");
+        amountText.SetText(costText + Mathf.RoundToInt(currentAmount));
     }
 
     public void UpdateAmount(int newAmount)
     {
         targetAmount = newAmount;
         changeTime = 0;
+    }
+
+    public void SetCost(int cost = -1)
+    {
+        costText = cost == -1 ? "" : cost + "/";
+        amountText.SetText(costText + Mathf.RoundToInt(currentAmount));
     }
 
     public virtual void Initialize(ItemSO item, int amount)

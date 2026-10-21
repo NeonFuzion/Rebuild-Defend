@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 7472825498009617223}
   - component: {fileID: 4526232885674297366}
   - component: {fileID: 3596367605550557929}
+  - component: {fileID: 5453128654608706429}
   m_Layer: 0
   m_Name: BasicTurret
   m_TagString: Untagged
@@ -155,7 +156,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.51, y: -0.02, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4738139709455873082}
@@ -206,6 +207,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   projectileData: {fileID: 11400000, guid: 8ea034bf1fc10cc408d91d69d4e8a7e2, type: 2}
+  turretRecycleAudioClip: {fileID: 8300000, guid: 739048c95aa56874c880a0d16046ef74, type: 3}
+  turretFireAudioClip: {fileID: 8300000, guid: 8778a27c0d8ded349840444bdef7f62c, type: 3}
   pivot: {fileID: 8292408684831000047}
   firePoint: {fileID: 6370562557250115970}
   particleSystem: {fileID: 93059966536229343}
@@ -296,6 +299,36 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &5453128654608706429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948320728699806019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be757e0fa552aa49a656b78b52fb46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clickable
+  isClickable: 0
+  offset: {x: 0, y: 2}
+  prefabSignifier: {fileID: 2571462238954067627, guid: 767520a9f80c10c4199d33b7a8f2784b, type: 3}
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1118568004034381855}
+        m_TargetAssemblyTypeName: Turret, Assembly-CSharp
+        m_MethodName: OnBreakDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6329195805896406035
 GameObject:
   m_ObjectHideFlags: 0

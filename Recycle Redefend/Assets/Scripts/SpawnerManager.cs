@@ -7,7 +7,7 @@ public class SpawnerManager : MonoBehaviour
     public static SpawnerManager Instance { get; private set; }
 
     [SerializeField] int spawnerCount = 3, spawnerIncrementAmount = 1, subwaveCount = 5, subwaveIncrementAmount = 1;
-    [SerializeField] float spawnCooldown = 1.5f, spawnChance = 0.8f, upgradeChance = 0.1f, upgradeIncrementAmount = 0.05f, spawnRadius = 5;
+    [SerializeField] float spawnCooldown = 1.5f, spawnChance = 0.8f, upgradeChance = 0.05f, upgradeIncrementAmount = 0.03f, spawnRadius = 5;
     [SerializeField] GameObject prefabSpawner, prefabShipment;
     [SerializeField] Transform commandCenter, spawnArea;
     [SerializeField] GameObject[] prefabEnemies;
@@ -118,7 +118,7 @@ public class SpawnerManager : MonoBehaviour
             {
                 if (Random.value > spawnChance) continue;
                 int strength = 0;
-                for (; strength < prefabEnemies.Length; strength++)
+                for (; strength < prefabEnemies.Length - 1; strength++)
                 {
                     if (Random.value >= upgradeChance) break;
                 }

@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1135204834024293695
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 500658857609607055, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5946919242610052872, guid: 17d5955b9778b15439da525182f25321, type: 3}
+    - target: {fileID: 3891535026355580741, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891535026355580741, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: cooldown
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891535026355580741, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: durability
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891535026355580741, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: projectileData
+      value: 
+      objectReference: {fileID: 11400000, guid: 33af8cf7eabdb1446a9e9768c686df28, type: 2}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.84705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990115566659752033, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0.3529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485606065049525077, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712660649410741785, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_Name
+      value: SniperMTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439792551262104883, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1164481459093678828, guid: 17d5955b9778b15439da525182f25321, type: 3}
+    m_RemovedComponents:
+    - {fileID: 8226130719454841895, guid: 5a605980ce70d394db02463e6e619611, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a605980ce70d394db02463e6e619611, type: 3}
