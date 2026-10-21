@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd52f7724500bac408f49ed69cd85fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  itemDropChance: 0.3
   damage: 5
   hitAudioClip: {fileID: 8300000, guid: 464c4ee9e2d3662489cf046293ca997c, type: 3}
   deathAudioClip: {fileID: 8300000, guid: 9e86a049a417f5d468a298f8cf363440, type: 3}

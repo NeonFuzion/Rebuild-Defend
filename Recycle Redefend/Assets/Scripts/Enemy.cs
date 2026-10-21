@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] float itemDropChance = 0.5f;
     [SerializeField] int damage;
     [SerializeField] AudioClip hitAudioClip, deathAudioClip;
     [SerializeField] LayerMask baseLayer;
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour
         if (isDead)
         {
             enemyState = EnemyState.Dead;
+            if (Random.value < itemDropChance) BattleManager.Instance.InvokeOnEnemyDeathEvent();
             SoundEffectsManager.Instance.PlaySoundEffect(deathAudioClip, transform.position, 1);
             animator.CrossFade(deathAnimHash, 0, 0);
         }

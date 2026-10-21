@@ -9130,6 +9130,7 @@ MonoBehaviour:
   prefabEnemies:
   - {fileID: 8652277893342165645, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
   - {fileID: 4232923653833387361, guid: 53eafaee71e86924e9da785626d1221b, type: 3}
+  - {fileID: 4390102591139689064, guid: 9b4e31d7a51fb9940b72b3227c4133ab, type: 3}
   - {fileID: 7911087607133389633, guid: 3af112f04e33bbf4394cb27e35ddd59a, type: 3}
 --- !u!114 &1867839224
 MonoBehaviour:

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -34,7 +32,11 @@ public class TurretManager : MonoBehaviour
         BattleManager.Instance.AddOnTurretRecycledListener((object obj, BattleManager.TurretRecycleArgs args) =>
             RecycleTurret(args.TurretRecipe, args.Position));
         BattleManager.Instance.AddOnTurretHoverEnterListener((object obj, int args) => ShowCost(turretRecipes[args]));
-        BattleManager.Instance.AddOnTurretHoverExitListener((object obj, EventArgs args) => HideCost());
+        BattleManager.Instance.AddOnTurretHoverExitListener((object obj, System.EventArgs args) => HideCost());
+        BattleManager.Instance.AddOnEnemyDeathListener((object obj, System.EventArgs args) =>
+        {
+            AddItem(items[Random.Range(0, items.Length - 1)].Item, 1);
+        });
 
         inventory = new Dictionary<ItemSO, AmountToSlot>();
         foreach (ItemToAmount pair in items)

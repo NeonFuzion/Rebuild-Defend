@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -874446186958046528, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
       propertyPath: damage
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744493628887799698, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
       propertyPath: health
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1099379043384918852, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
       propertyPath: m_Sprite

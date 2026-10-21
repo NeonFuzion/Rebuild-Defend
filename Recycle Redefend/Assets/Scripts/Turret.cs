@@ -14,9 +14,8 @@ public class Turret : MonoBehaviour
     [SerializeField] ProjectileSO projectileData;
     [SerializeField] AudioClip turretRecycleAudioClip, turretFireAudioClip;
     [SerializeField] Transform pivot, firePoint;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem particleSystem, smokeParticleSystem;
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] UnityEvent onBreakDown;
 
     int firingAnimHash = Animator.StringToHash("TurretFire"),
         placingAnimHash = Animator.StringToHash("TurretPlace"),
@@ -32,6 +31,7 @@ public class Turret : MonoBehaviour
     TurretRecipeSO turretRecipe;
     Clickable clickable;
     UnityEvent<int> onTickDurability;
+    UnityEvent onBreakDown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,10 +88,12 @@ public class Turret : MonoBehaviour
         onTickDurability.Invoke(durability);
 
         if (durability > 0) return;
+        if (!gameObject) return;
         StopAllCoroutines();
         clickable?.Activate();
         clickable?.Show();
         turretState = TurretState.Breaking;
+        smokeParticleSystem.Play();
         animator.CrossFade(breakAnimHash, 0, 0);
     }
 
@@ -114,6 +116,7 @@ public class Turret : MonoBehaviour
         this.turretRecipe = turretRecipe;
 
         onTickDurability = new UnityEvent<int>();
+        onBreakDown = new UnityEvent();
         onTickDurability.AddListener(durabilityBar.UpdateDurability);
         onBreakDown.AddListener(() => Destroy(durabilityBar.gameObject));
         durabilityBar.Initialize(durability);
@@ -121,7 +124,9 @@ public class Turret : MonoBehaviour
 
     public void OnBreakDown()
     {
+        StopAllCoroutines();
         BattleManager.Instance.InvokeOnTurretRecycledEvent(turretRecipe, transform.position);
+        BattleManager.Instance.RemoveOnWaveEndListener((System.Object obj, EventArgs args) => UpdateDurability());
         SoundEffectsManager.Instance.PlaySoundEffect(turretRecycleAudioClip, transform.position, 1);
         onBreakDown?.Invoke();
         clickable.DestroySignifier();

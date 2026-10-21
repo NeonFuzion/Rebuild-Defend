@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4971929917873244389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -874446186958046528, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 683860208943889216, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744493628887799698, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: health
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099379043384918852, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8358884939965208364, guid: 21825f4caa1a31f4eb61b64ad2c0093c, type: 3}
+    - target: {fileID: 2217159291819836355, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Speed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217159291819836355, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217159291819836355, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217159291819836355, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379243385930075939, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379243385930075939, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652277893342165645, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}
+      propertyPath: m_Name
+      value: Xenigoop
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9a5e90d97b54bb42ba5c97959681079, type: 3}

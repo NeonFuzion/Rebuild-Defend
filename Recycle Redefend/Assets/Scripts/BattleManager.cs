@@ -19,7 +19,7 @@ public class BattleManager : MonoBehaviour
     int timeRemaining, enemiesRemaining, currentWave;
     bool isResting;
 
-    event EventHandler onWaveStarted, onWaveEnded, onTurretHoverExit;
+    event EventHandler onWaveStarted, onWaveEnded, onTurretHoverExit, onEnemyDeath;
     event EventHandler<int> onTurretHoverEnter;
     event EventHandler<AddItemArgs> onShipmentCollected;
     public class AddItemArgs : EventArgs
@@ -165,6 +165,11 @@ public class BattleManager : MonoBehaviour
         onTurretHoverExit += eventHandler;
     }
 
+    public void AddOnEnemyDeathListener(EventHandler eventHandler)
+    {
+        onEnemyDeath += eventHandler;
+    }
+
     public void InvokeOnShipmentCollectedEvent(ItemSO item, int amount)
     {
         onShipmentCollected?.Invoke(this, new AddItemArgs() { Item = item, Amount = amount });
@@ -187,5 +192,15 @@ public class BattleManager : MonoBehaviour
     public void InvokeOnTurretHoverExitEvent()
     {
         onTurretHoverExit?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void InvokeOnEnemyDeathEvent()
+    {
+        onEnemyDeath?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void RemoveOnWaveEndListener(EventHandler eventHandler)
+    {
+        onWaveEnded -= eventHandler;
     }
 }
