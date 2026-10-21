@@ -22,12 +22,12 @@ public class DurabilityBar : MonoBehaviour
     public void Initialize(int durability)
     {
         this.durability = durability;
-        bars = GetComponentsInChildren<Image>();
         for (int i = 0; i < transform.childCount; i++)
         {
             if (i < durability) continue;
-            bars[i].gameObject.SetActive(false);
+            transform.GetChild(i).gameObject.SetActive(false);
         }
+        bars = GetComponentsInChildren<Image>();
     }
 
     public void UpdateDurability(int newDurability)

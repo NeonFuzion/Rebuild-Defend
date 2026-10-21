@@ -74,8 +74,7 @@ public class Projectile : MonoBehaviour
             if (colliders.Length == 0) return;
             DealDamage(colliders);
             
-            if (data.PenetrationCount == 0) return;
-            if (currentPenetrationCount > 0) return;
+            if (data.PenetrationCount != 0 && currentPenetrationCount > 0) return;
             DestroySelf();
         }
     }

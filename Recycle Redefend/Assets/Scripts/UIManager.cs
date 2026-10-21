@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,14 +10,17 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] int minItems = 10, maxItems = 15;
     [SerializeField] Transform worldCanvas;
-    [SerializeField] ItemSO[] items;
+    [SerializeField] AudioClip openAudioClip;
     [SerializeField] Transform optionParent;
+    [SerializeField] ItemSO[] items;
+    [SerializeField] UnityEvent onDeath;
 
     int appearAnimHash = Animator.StringToHash("CraftingAppear"),
         disappearAnimHash = Animator.StringToHash("CraftingDisappear"),
         shipmentOpenAnimHash = Animator.StringToHash("ShipmentOpen"),
         shipmentCloseAnimHash = Animator.StringToHash("ShipmentClose"),
-        healthHitAnimHash = Animator.StringToHash("HealthHit");
+        healthHitAnimHash = Animator.StringToHash("HealthHit"),
+        deathAppear = Animator.StringToHash("DeathAppear");
 
     Animator animator;
     ShipmentOption[] shipmentOptions;
@@ -68,26 +73,39 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void OnAnimationCloseShipment()
-    {
-        if (BattleManager.Instance.IsInCombat) return;
-        BattleManager.Instance.UnpauseTime();
-        animator.CrossFade(appearAnimHash, 0, 0);
-    }
-
     public void OpenShipment()
     {
+        SoundEffectsManager.Instance.PlaySoundEffect(openAudioClip, transform.position, 1);
         BattleManager.Instance.PauseTime();
         animator.CrossFade(shipmentOpenAnimHash, 0, 0);
     }
 
     public void CloseShipment()
     {
+        BattleManager.Instance.UnpauseTime();
         animator.CrossFade(shipmentCloseAnimHash, 0, 0);
     }
 
     public void TakeDamage()
     {
         animator.CrossFade(healthHitAnimHash, 0, 0);
+    }
+
+    public void EndGame()
+    {
+        onDeath?.Invoke();
+        animator.CrossFade(deathAppear, 0, 0);
+    }
+
+    public void QuitGame()
+    {
+        BattleManager.Instance.UnpauseTime();
+        SceneManager.LoadScene(0);
+    }
+
+    public void RestartGame()
+    {
+        BattleManager.Instance.UnpauseTime();
+        SceneManager.LoadScene(1);
     }
 }

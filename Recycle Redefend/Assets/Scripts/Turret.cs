@@ -16,6 +16,7 @@ public class Turret : MonoBehaviour
     [SerializeField] Transform pivot, firePoint;
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] UnityEvent onBreakDown;
 
     int firingAnimHash = Animator.StringToHash("TurretFire"),
         placingAnimHash = Animator.StringToHash("TurretPlace"),
@@ -31,7 +32,6 @@ public class Turret : MonoBehaviour
     TurretRecipeSO turretRecipe;
     Clickable clickable;
     UnityEvent<int> onTickDurability;
-    UnityEvent onBreakDown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -89,6 +89,7 @@ public class Turret : MonoBehaviour
 
         if (durability > 0) return;
         StopAllCoroutines();
+        clickable?.Activate();
         clickable?.Show();
         turretState = TurretState.Breaking;
         animator.CrossFade(breakAnimHash, 0, 0);
@@ -113,7 +114,6 @@ public class Turret : MonoBehaviour
         this.turretRecipe = turretRecipe;
 
         onTickDurability = new UnityEvent<int>();
-        onBreakDown = new UnityEvent();
         onTickDurability.AddListener(durabilityBar.UpdateDurability);
         onBreakDown.AddListener(() => Destroy(durabilityBar.gameObject));
         durabilityBar.Initialize(durability);

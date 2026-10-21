@@ -8,25 +8,36 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI amountText;
 
+    int updateAnimHash = Animator.StringToHash("ItemUpdate");
+
     int targetAmount;
     float changeTime, currentAmount;
     string costText;
+
+    Animator animator;
 
     public int Amount => targetAmount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (changeTime >= 1) return;
-        changeTime += changeSpeed * Time.deltaTime;
-        currentAmount = Mathf.Lerp(currentAmount, targetAmount, changeSpeed);
+        if (Time.time < changeTime) return;
+        if (currentAmount == targetAmount) return;
+        changeTime = Time.time + changeSpeed;
+        currentAmount += Mathf.Sign(targetAmount - currentAmount);
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
         amountText.SetText(costText + Mathf.RoundToInt(currentAmount));
+        animator.CrossFade(updateAnimHash, 0, 0);
     }
 
     public void UpdateAmount(int newAmount)
@@ -38,7 +49,7 @@ public class ItemSlot : MonoBehaviour
     public void SetCost(int cost = -1)
     {
         costText = cost == -1 ? "" : cost + "/";
-        amountText.SetText(costText + Mathf.RoundToInt(currentAmount));
+        UpdateText();
     }
 
     public virtual void Initialize(ItemSO item, int amount)

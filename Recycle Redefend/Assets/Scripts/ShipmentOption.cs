@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class ShipmentOption : ItemSlot
 {
+    [SerializeField] AudioClip clickAudioClip;
+
+    bool isActive;
+
     ItemSO item;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,10 +24,14 @@ public class ShipmentOption : ItemSlot
     {
         base.Initialize(item, amount);
         this.item = item;
+        isActive = true;
     }
 
     public void OnClick()
     {
+        if (!isActive) return;
+        isActive = false;
+        SoundEffectsManager.Instance.PlaySoundEffect(clickAudioClip, transform.position, 1);
         BattleManager.Instance.InvokeOnShipmentCollectedEvent(item, Amount);        
     }
 }

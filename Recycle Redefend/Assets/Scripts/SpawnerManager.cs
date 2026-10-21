@@ -7,7 +7,8 @@ public class SpawnerManager : MonoBehaviour
     public static SpawnerManager Instance { get; private set; }
 
     [SerializeField] int spawnerCount = 3, spawnerIncrementAmount = 1, subwaveCount = 5, subwaveIncrementAmount = 1;
-    [SerializeField] float spawnCooldown = 1.5f, spawnChance = 0.8f, upgradeChance = 0.05f, upgradeIncrementAmount = 0.03f, spawnRadius = 5;
+    [SerializeField] float spawnCooldown = 1.5f, spawnChance = 0.8f, upgradeChance = 0.05f, upgradeIncrementAmount = 0.03f,
+        spawnRadius = 5, shipmentSpawnMultiplier = 0.8f, edgePositionMultiplier = 0.4f;
     [SerializeField] GameObject prefabSpawner, prefabShipment;
     [SerializeField] Transform commandCenter, spawnArea;
     [SerializeField] GameObject[] prefabEnemies;
@@ -55,7 +56,7 @@ public class SpawnerManager : MonoBehaviour
     {
         float x = 0;
         float y = 0;
-        Vector2 bounds = spawnArea.localScale * 0.4f;
+        Vector2 bounds = spawnArea.localScale * edgePositionMultiplier;
         if (Random.value > 0.5f)
         {
             x = Random.Range(-bounds.x, bounds.x);
@@ -71,7 +72,8 @@ public class SpawnerManager : MonoBehaviour
 
     void CreateShipment()
     {
-        GameObject shipment = Instantiate(prefabShipment, GetEdgePosition(), Quaternion.identity);
+        //if (BattleManager.Instance.CurrentWave == 0) return;
+        GameObject shipment = Instantiate(prefabShipment, GetEdgePosition() * shipmentSpawnMultiplier, Quaternion.identity);
     }
 
     void CreateSpawner()

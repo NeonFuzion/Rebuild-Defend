@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8482396697154575747}
+  - component: {fileID: 5431415029170658727}
+  - component: {fileID: 2179343382340456964}
   m_Layer: 0
   m_Name: Shipment
   m_TagString: Untagged
@@ -32,6 +34,67 @@ Transform:
   - {fileID: 298504391249110854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5431415029170658727
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30235133069899465}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03eb24dbd5b278a4ba22e0cf2d44cc1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2179343382340456964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30235133069899465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e4bc58116c6564492e233136c86b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventTrigger
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5161396029451182946}
+        m_TargetAssemblyTypeName: Clickable, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5161396029451182946}
+        m_TargetAssemblyTypeName: Clickable, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7979882097877247698
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be757e0fa552aa49a656b78b52fb46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Clickable
+  isActive: 1
   offset: {x: 0, y: 2}
+  clickSuccessAudioClip: {fileID: 0}
+  clickFailAudioClip: {fileID: 0}
   prefabSignifier: {fileID: 2571462238954067627, guid: 767520a9f80c10c4199d33b7a8f2784b, type: 3}
   onClick:
     m_PersistentCalls:
@@ -202,6 +268,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2338693682884856471
 MonoBehaviour:
   m_ObjectHideFlags: 0

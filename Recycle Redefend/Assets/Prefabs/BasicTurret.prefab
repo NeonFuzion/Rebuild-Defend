@@ -215,6 +215,21 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  onBreakDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1070674903935399739}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &7472825498009617223
 Animator:
   serializedVersion: 7
@@ -311,8 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be757e0fa552aa49a656b78b52fb46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Clickable
-  isClickable: 0
+  isActive: 0
   offset: {x: 0, y: 2}
+  clickSuccessAudioClip: {fileID: 0}
+  clickFailAudioClip: {fileID: 0}
   prefabSignifier: {fileID: 2571462238954067627, guid: 767520a9f80c10c4199d33b7a8f2784b, type: 3}
   onClick:
     m_PersistentCalls:
@@ -329,6 +346,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6329195805896406035
 GameObject:
   m_ObjectHideFlags: 0

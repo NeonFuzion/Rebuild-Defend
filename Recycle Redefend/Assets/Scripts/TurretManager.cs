@@ -139,7 +139,7 @@ public class TurretManager : MonoBehaviour
             inventory[pair.Item].ItemSlot.SetCost(pair.Amount);
         }
         
-        if (currentRecipe.Materials.Length < 4) return;
+        if (currentRecipe.Materials.Length == 4) return;
         inventory[unrecyclable].ItemSlot.SetCost();
     }
 

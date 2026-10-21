@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.ComponentModel;
 using TMPro;
-using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,7 +12,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] float restDuration, waveDuration;
     [SerializeField] AudioClip waveStartAudioClip, waveEndAudioClip, countdownAudioClip;
     [SerializeField] Health health;
-    [SerializeField] Button fastForwardButton;
+    [SerializeField] UIButton fastForwardButton;
     [SerializeField] TextMeshProUGUI restText, stateText, waveText;
 
     float baseTime;
@@ -37,6 +35,7 @@ public class BattleManager : MonoBehaviour
     }
 
     public bool IsInCombat { get; private set; }
+    public int CurrentWave => currentWave;
 
     void Awake()
     {
@@ -49,7 +48,7 @@ public class BattleManager : MonoBehaviour
     {
         currentWave = 0;
         isResting = false;
-        fastForwardButton.onClick.AddListener(() =>
+        fastForwardButton.OnClick.AddListener(() =>
         {
             if (IsInCombat) return;
             isResting = false;
@@ -89,8 +88,8 @@ public class BattleManager : MonoBehaviour
     IEnumerator WaveCoroutine()
     {
         IsInCombat = true;
-        fastForwardButton.gameObject.SetActive(false);
         waveText.SetText("Wave " + ++currentWave);
+        SoundEffectsManager.Instance.PlaySoundEffect(waveStartAudioClip, transform.position, 1);
         yield return new WaitWhile(() => SpawnerManager.Instance.AreEnemiesActive);
         EndWave();
     }
@@ -99,7 +98,6 @@ public class BattleManager : MonoBehaviour
     {
         IsInCombat = false;
         isResting = true;
-        fastForwardButton.gameObject.SetActive(true);
         SoundEffectsManager.Instance.PlaySoundEffect(waveEndAudioClip, transform.position, 1);
         baseTime = Time.time + restDuration;
         yield return new WaitWhile(() => isResting);
@@ -120,7 +118,11 @@ public class BattleManager : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        health.TakeDamage(damage);
+        bool isDead = health.TakeDamage(damage);
+
+        if (!isDead) return;
+        PauseTime();
+        UIManager.Instance.EndGame();
     }
 
     public void PauseTime()
