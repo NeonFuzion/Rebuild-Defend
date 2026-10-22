@@ -32,6 +32,7 @@ public class Turret : MonoBehaviour
     Clickable clickable;
     UnityEvent<int> onTickDurability;
     UnityEvent onBreakDown;
+    EventHandler deathAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,7 +41,8 @@ public class Turret : MonoBehaviour
         animator = GetComponent<Animator>();
         clickable = GetComponent<Clickable>();
 
-        BattleManager.Instance.AddOnWaveEndedListener((System.Object obj, EventArgs args) => UpdateDurability());
+        deathAction = (System.Object obj, EventArgs args) => UpdateDurability();
+        BattleManager.Instance.AddOnWaveEndedListener(deathAction);
     }
 
     // Update is called once per frame
@@ -88,7 +90,6 @@ public class Turret : MonoBehaviour
         onTickDurability.Invoke(durability);
 
         if (durability > 0) return;
-        if (!gameObject) return;
         StopAllCoroutines();
         clickable?.Activate();
         clickable?.Show();
@@ -126,9 +127,11 @@ public class Turret : MonoBehaviour
     {
         StopAllCoroutines();
         BattleManager.Instance.InvokeOnTurretRecycledEvent(turretRecipe, transform.position);
-        BattleManager.Instance.RemoveOnWaveEndListener((System.Object obj, EventArgs args) => UpdateDurability());
+        BattleManager.Instance.RemoveOnWaveEndListener(deathAction);
         SoundEffectsManager.Instance.PlaySoundEffect(turretRecycleAudioClip, transform.position, 1);
         onBreakDown?.Invoke();
+        onBreakDown.RemoveAllListeners();
+        onTickDurability.RemoveAllListeners();
         clickable.DestroySignifier();
         animator.CrossFade(recycleAnimHash, 0, 0);
     }
