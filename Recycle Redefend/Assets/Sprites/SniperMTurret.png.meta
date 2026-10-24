@@ -122,10 +122,10 @@ TextureImporter:
       name: SniperMTurretBase
       rect:
         serializedVersion: 2
-        x: 1
-        y: 17
-        width: 14
-        height: 14
+        x: 2
+        y: 18
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,12 +144,12 @@ TextureImporter:
       name: SniperMTurretPivot
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
+        x: 17
+        y: 17
+        width: 14
+        height: 15
       alignment: 9
-      pivot: {x: 0.5, y: 0.3}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,10 +166,10 @@ TextureImporter:
       name: SniperMTurretBullet
       rect:
         serializedVersion: 2
-        x: 16
-        y: 5
-        width: 15
-        height: 6
+        x: 17
+        y: 6
+        width: 13
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -11,7 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] int minItems = 10, maxItems = 15;
     [SerializeField] Transform worldCanvas;
     [SerializeField] AudioClip openAudioClip;
-    [SerializeField] Transform optionParent;
+    [SerializeField] RectTransform prefabPointer;
+    [SerializeField] Transform optionParent, pointerParent;
     [SerializeField] ItemSO[] items;
     [SerializeField] UnityEvent onDeath;
 
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
 
     Animator animator;
     ShipmentOption[] shipmentOptions;
+    List<RectTransform> pointers;
 
     public Transform WorldCanvas => worldCanvas;
 
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        pointers = new List<RectTransform>();
         shipmentOptions = optionParent.GetComponentsInChildren<ShipmentOption>();
 
         BattleManager.Instance.AddOnWaveEndedListener((object obj, System.EventArgs args) => OnWaveEnded());
@@ -107,5 +110,22 @@ public class UIManager : MonoBehaviour
     {
         BattleManager.Instance.UnpauseTime();
         SceneManager.LoadScene(1);
+    }
+
+    public RectTransform RetrievePointer()
+    {
+        RectTransform pointer = pointers.Find(element => !element.gameObject.activeInHierarchy);
+        if (!pointer)
+        {
+            pointer = Instantiate(prefabPointer, pointerParent);
+            pointers.Add(pointer);
+        }
+        return pointer;
+    }
+
+    public void ReturnPointer(RectTransform pointer)
+    {
+        if (!pointer) return;
+        pointer.gameObject.SetActive(false);
     }
 }

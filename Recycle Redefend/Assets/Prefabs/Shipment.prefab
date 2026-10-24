@@ -286,3 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc015a28745ebc74bb0ae10bcc0fa0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shipment
+  pointerFadeDistance: 1
+  pointerMaxY: 5.5
+  pointerMinY: -3.5
+  pointerMaxX: 14
+  pointerMinX: -14

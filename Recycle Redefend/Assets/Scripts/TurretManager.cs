@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class TurretManager : MonoBehaviour
@@ -69,7 +70,8 @@ public class TurretManager : MonoBehaviour
         if (!currentRecipe || BattleManager.Instance.IsInCombat ||
             turretPositions.Find(pos => Vector2.Distance(pos, mousePosition) < turrentPlacementDistance) != Vector2.zero ||
             Mathf.Abs(mousePosition.x) > placementBounds.x || Mathf.Abs(mousePosition.y) > placementBounds.y ||
-            (Mathf.Abs(mousePosition.x) < baseBounds.x && Mathf.Abs(mousePosition.y) < baseBounds.y))
+            (Mathf.Abs(mousePosition.x) < baseBounds.x && Mathf.Abs(mousePosition.y) < baseBounds.y) ||
+            EventSystem.current.IsPointerOverGameObject())
         {
             SoundEffectsManager.Instance.PlaySoundEffect(placeFailAudioClip, mousePosition, 1);
             return;

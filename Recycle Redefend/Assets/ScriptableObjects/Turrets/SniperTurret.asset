@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: SniperTurret
   m_EditorClassIdentifier: Assembly-CSharp::TurretRecipeSO
   <PrefabTurret>k__BackingField: {fileID: 7712660649410741785, guid: 5a605980ce70d394db02463e6e619611, type: 3}
-  <BaseSprite>k__BackingField: {fileID: -4095391172050105586, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
-  <PivotSprite>k__BackingField: {fileID: -3627158958028208274, guid: b115141d5ed2f5d4c8c95bef5677b6a2, type: 3}
   <Materials>k__BackingField:
   - <Item>k__BackingField: {fileID: 11400000, guid: 2b304ad28513c9546889bfe8ad300736, type: 2}
-    <Amount>k__BackingField: 14
+    <Amount>k__BackingField: 11
   - <Item>k__BackingField: {fileID: 11400000, guid: 465da7c87dab057408dc4e631edf141d, type: 2}
     <Amount>k__BackingField: 7
   - <Item>k__BackingField: {fileID: 11400000, guid: cf55031f1e2bb6c4dae8b6f780907d67, type: 2}
-    <Amount>k__BackingField: 10
+    <Amount>k__BackingField: 8

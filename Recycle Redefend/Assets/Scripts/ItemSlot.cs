@@ -6,6 +6,7 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField] float changeSpeed;
     [SerializeField] Image itemImage;
+    [SerializeField] Color insufficientColor = Color.red, sufficientColor = Color.black;
     [SerializeField] TextMeshProUGUI amountText;
 
     int updateAnimHash = Animator.StringToHash("ItemUpdate");
@@ -49,6 +50,7 @@ public class ItemSlot : MonoBehaviour
     public void SetCost(int cost = -1)
     {
         costText = cost == -1 ? "" : cost + "/";
+        amountText.color = cost > targetAmount ? insufficientColor : sufficientColor;
         UpdateText();
     }
 

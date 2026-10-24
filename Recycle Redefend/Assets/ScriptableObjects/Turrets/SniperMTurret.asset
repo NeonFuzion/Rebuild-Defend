@@ -15,10 +15,10 @@ MonoBehaviour:
   <PrefabTurret>k__BackingField: {fileID: 7262565909977482022, guid: cb0989f9baedee1489596f1170edb0fb, type: 3}
   <Materials>k__BackingField:
   - <Item>k__BackingField: {fileID: 11400000, guid: 2b304ad28513c9546889bfe8ad300736, type: 2}
-    <Amount>k__BackingField: 10
+    <Amount>k__BackingField: 7
   - <Item>k__BackingField: {fileID: 11400000, guid: 465da7c87dab057408dc4e631edf141d, type: 2}
-    <Amount>k__BackingField: 5
+    <Amount>k__BackingField: 4
   - <Item>k__BackingField: {fileID: 11400000, guid: cf55031f1e2bb6c4dae8b6f780907d67, type: 2}
-    <Amount>k__BackingField: 5
+    <Amount>k__BackingField: 3
   - <Item>k__BackingField: {fileID: 11400000, guid: c9b2b22b7d59d5745af3cdd9bd342c29, type: 2}
-    <Amount>k__BackingField: 8
+    <Amount>k__BackingField: 4
