@@ -20,8 +20,16 @@ public class Shipment : MonoBehaviour
         if (!pointer) return;
         Vector3 cameraPosition = Camera.main.transform.position;
         Vector2 position = new Vector3(
-            Mathf.Clamp(transform.position.x, cameraPosition.x + pointerMinX, cameraPosition.x + pointerMaxX),
-            Mathf.Clamp(transform.position.y, cameraPosition.y + pointerMinY, cameraPosition.y + pointerMaxY)
+            Mathf.Clamp(
+                transform.position.x,
+                cameraPosition.x + pointerMinX * Camera.main.orthographicSize,
+                cameraPosition.x + pointerMaxX * Camera.main.orthographicSize
+                ),
+            Mathf.Clamp(
+                transform.position.y,
+                cameraPosition.y + pointerMinY * Camera.main.orthographicSize, 
+                cameraPosition.y + pointerMaxY * Camera.main.orthographicSize
+                )
         );
         pointer.anchoredPosition = position;
 
